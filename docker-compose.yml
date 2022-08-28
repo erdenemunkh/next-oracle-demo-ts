@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  oracle:
+    image: gvenzl/oracle-xe:21-slim
+    # image: container-registry.oracle.com/database/express:21.3.0-xe
+    container_name: oracledatabase
+    volumes:
+      - ./oracle-volume:/opt/oracle/oradata
+      - ./startupscripts:/docker-entrypoint-initdb.d
+    ports:
+      - 1521:1521
+    environment:
+      ORACLE_PASSWORD: root
+      APP_USER: dbuser
+      APP_USER_PASSWORD: dbuser
+
+volumes:
+  oracle-volume:
+  startupscripts:
